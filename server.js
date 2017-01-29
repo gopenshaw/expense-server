@@ -30,6 +30,9 @@ apiRoutes.post('/authenticate', routes.postAuthenticate)
 apiRoutes.post('/expenses', auth.authenticate)
 apiRoutes.post('/expenses', routes.postExpenses)
 
+apiRoutes.get('/expenses', auth.authenticate)
+apiRoutes.get('/expenses', routes.getExpenses)
+
 app.use('/api', apiRoutes)
 
 app.listen(port);

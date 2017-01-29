@@ -51,3 +51,16 @@ exports.postExpenses = function(req, res) {
     else res.json({"message": "expense added"});
   });
 }
+
+exports.getExpenses = function(req, res) {
+  Expense.find({}).select({
+    date: 1,
+    cost: 1,
+    description: 1,
+    user: 1,
+    _id: 1
+  }).exec(function(err, docs) {
+    if (err) res.status(422).send({"message": err.message});
+    else res.json({"expenses": docs});
+  });
+}

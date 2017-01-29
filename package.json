@@ -1,0 +1,13 @@
+{
+  "name": "expense-server",
+  "main": "server.js",
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.16.0",
+    "cors": "^2.8.1",
+    "express": "^4.14.0",
+    "jsonwebtoken": "^7.2.1",
+    "mongoose": "^4.7.9",
+    "morgan": "^1.7.0"
+  }
+}

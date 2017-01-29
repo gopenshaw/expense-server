@@ -1,3 +1,4 @@
+var Expense = require('./models/expense');
 var userRepository = require('./user-repository')
 
 exports.postUsers = function(req, res) {
@@ -36,4 +37,17 @@ exports.postAuthenticate = function(req, res) {
       }
     });
   }
+}
+
+exports.postExpenses = function(req, res) {
+  var expense = Expense({
+    date: req.body.date,
+    cost: req.body.cost,
+    description: req.body.description,
+    user: req.decoded.name
+  });
+  expense.save(function(err) {
+    if (err) res.status(422).send({"message": err.message});
+    else res.json({"message": "expense added"});
+  });
 }

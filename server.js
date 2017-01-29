@@ -26,6 +26,10 @@ apiRoutes = express.Router();
 
 apiRoutes.post('/users', routes.postUsers)
 apiRoutes.post('/authenticate', routes.postAuthenticate)
+
+apiRoutes.post('/expenses', auth.authenticate)
+apiRoutes.post('/expenses', routes.postExpenses)
+
 app.use('/api', apiRoutes)
 
 app.listen(port);

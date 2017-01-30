@@ -64,3 +64,22 @@ exports.getExpenses = function(req, res) {
     else res.json({"expenses": docs});
   });
 }
+
+exports.getExpensesForUser = function(req, res) {
+  var username = req.params.username
+  if (username !== req.decoded.name) {
+    res.status(403).send();
+    return;
+  }
+
+  Expense.find({user: username}).select({
+    date: 1,
+    cost: 1,
+    description: 1,
+    user: 1,
+    _id: 1
+  }).exec(function(err, docs) {
+    if (err) res.status(422).send({"message": err.message});
+    else res.json({"expenses": docs});
+  });
+}

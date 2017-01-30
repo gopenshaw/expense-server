@@ -33,6 +33,9 @@ apiRoutes.post('/expenses', routes.postExpenses)
 apiRoutes.get('/expenses', auth.authenticate)
 apiRoutes.get('/expenses', routes.getExpenses)
 
+apiRoutes.get('/expenses/:username', auth.authenticate)
+apiRoutes.get('/expenses/:username', routes.getExpensesForUser)
+
 app.use('/api', apiRoutes)
 
 app.listen(port);

@@ -28,12 +28,15 @@ exports.postAuthenticate = function(req, res) {
     res.status(422).send({"message": "password required"});
   }
   else {
-    userRepository.authenticateUser(req, function(err, token) {
+    userRepository.authenticateUser(req, function(err, token, isAdmin) {
       if (err) {
         res.status(422).send({"message": err.message});
       }
       else {
-        res.json({"token": token});
+        res.json({
+          "token": token,
+          "isAdmin": isAdmin
+        });
       }
     });
   }
@@ -48,7 +51,7 @@ exports.postExpenses = function(req, res) {
   });
   expense.save(function(err) {
     if (err) res.status(422).send({"message": err.message});
-    else res.json({"message": "expense added"});
+    else res.json(expense)
   });
 }
 

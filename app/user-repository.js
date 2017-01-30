@@ -34,7 +34,7 @@ exports.findUsers = function(callback) {
 }
 
 exports.authenticateUser = function(req, callback) {
-  User.findOne({ 'name': req.body.name }, 'name hash', function (err, person) {
+  User.findOne({ 'name': req.body.name }, 'name hash isAdmin', function (err, person) {
     if (!person) {
       callback({"message": "invalid creds"});
       return;
@@ -50,7 +50,7 @@ exports.authenticateUser = function(req, callback) {
         expiresIn: "1d"
       });
 
-      callback(null, token);
+      callback(null, token, person.isAdmin);
     });
   });
 }
